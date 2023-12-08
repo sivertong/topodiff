@@ -869,7 +869,7 @@ class EncoderUNetModel(nn.Module):
         self.input_blocks.apply(convert_module_to_f32)
         self.middle_block.apply(convert_module_to_f32)
 
-    def forward(self, x, timesteps):
+    def forward(self, x, timesteps, y=None):
         """
         Apply the model to an input batch.
 
@@ -878,6 +878,8 @@ class EncoderUNetModel(nn.Module):
         :return: an [N x K] Tensor of outputs.
         """
         emb = self.time_embed(timestep_embedding(timesteps, self.model_channels))
+
+        if self.num_class
 
         results = []
         h = x.type(self.dtype)
