@@ -1,0 +1,42 @@
+目前代码与目标不符的内容有：
+	1. 本代码针对二维图像的处理，主要是卷积层，需要改为针对一维采样
+	2. topodiff取消了原本的embedding条件生成法，将condition与Xt通道合并送入nn，topodiff的condition与Xt相同维度，而我们的condition为1*3，Xt为1*11，维度不同，所以必须还原embedding condition传入条件即原来的Input
+或者，我们将1*3的condition均匀扩充成3*11，与Xt合并为4*11的矩阵送入nn
+
+
+unet.py upsample函数        else:	
+            x = F.interpolate(x, scale_factor=2, mode="nearest")
+执行了采样过程，但是不符合我们的一维情形
+
+Q & A
+高斯分布通过采样难道不还是高斯分布吗，通过改变均值方差可以从高斯分布采样出图图像吗，这是一种什么采样方法
+
+gaussian_diffusion.py 641 line
+model_output = model(full_arr, self._scale_timesteps(t), **model_kwargs)跳转
+
+embedding在神经网络中如何运行，如何影响神经网络的推理，如何插入。
+
+unet.py line248 展现了embedding的具体工作流，这种变换的意义是什么？
+
+
+guassian_diffusion.py 641 line 
+model_output 32,2,64,64 为什么会输出两个通道？后续这两个通道进行了拆分再重组？
+A：因为后续要计算均值方差两个量？
+Q: 两个通道数值不一样？
+
+如果我们使用了一个过于复杂的模型，在训练困难外，会导致其他的不利吗，会导致网络预测不准吗
+
+每条训练数据对应一个时间步？如果每条数据训练多个时间步会怎样？
+
+Gaussian diffusion.py line295
+
+unet得到的两组channel参数中，只有model_output被用来去噪, model_var_values的作用是什么？
+
+train_util_IH.py 221line
+在变量表中没有找到变量LossAwareSampler？时间步重要性策略没能开启。
+
+fp16_util.py backward（）
+函数执行后，梯度被保存到了哪个变量中？
+loss是由计算图追踪的，构成loss的上游tensor中存储了梯度
+
+lr_anneal_steps 学习率退火似乎并未启动

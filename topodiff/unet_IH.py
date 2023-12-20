@@ -104,7 +104,12 @@ class Upsample(nn.Module):
                 x, (x.shape[2], x.shape[3] * 2, x.shape[4] * 2), mode="nearest"
             )
         else:
-            x = F.interpolate(x, scale_factor=2, mode="nearest")
+            if x.size(-1) == 2:
+                x = F.interpolate(x, scale_factor=3/2, mode="nearest")
+            elif x.size(-1) == 3:
+                x = F.interpolate(x, scale_factor=2, mode="nearest")
+            elif x.size(-1) == 6:
+                x = F.interpolate(x, scale_factor=11/6, mode="nearest")
         if self.use_conv:
             x = self.conv(x)
         return x
@@ -165,7 +170,7 @@ class ResBlock(TimestepBlock):
         out_channels=None,
         use_conv=False,
         use_scale_shift_norm=False,
-        dims=2,
+        dims=1,
         use_checkpoint=False,
         up=False,
         down=False,
@@ -435,7 +440,7 @@ class UNetModel(nn.Module):
         dropout=0,
         channel_mult=(1, 2, 4, 8),
         conv_resample=True,
-        dims=2,
+        dims=1,
         num_classes=None,
         use_checkpoint=False,
         use_fp16=False,

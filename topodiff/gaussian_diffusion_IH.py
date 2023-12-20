@@ -299,14 +299,7 @@ class GaussianDiffusion:
             if denoised_fn is not None:
                 x = denoised_fn(x)
             if clip_denoised:
-
-                # 针对IH-Diff问题的裁剪方式
-                x[..., :6] = x[..., :6].clamp(0, 1.5)  # 对前6个数值应用[0, 1.5]的范围
-                x[..., 6:9] = x[..., 6:9].clamp(0, 1)  # 对第6至第8个数值应用[0, 1]的范围
-                x[..., 9:] = x[..., 9:].clamp(-0.4, 0.4)  # 对第9至第10个数值应用[-0.4, 0.4]的范围
-                return x
-
-                # return x.clamp(-1, 1) 原本的裁剪方式
+                return x.clamp(-1, 1)
             return x
 
         if self.model_mean_type == ModelMeanType.PREVIOUS_X:
@@ -458,60 +451,6 @@ class GaussianDiffusion:
         sample = out["mean"] + nonzero_mask * th.exp(0.5 * out["log_variance"]) * noise
         return {"sample": sample, "pred_xstart": out["pred_xstart"]}
 
-    def p_sample_IH(
-            self,
-            model,
-            x,
-            cons,
-            t,
-            clip_denoised=True,
-            denoised_fn=None,
-            cond_fn_1=None,
-            cond_fn_2=None,
-            model_kwargs=None,
-    ):
-        """
-        Sample x_{t-1} from the model at the given timestep.
-
-        :param model: the model to sample from.
-        :param x: the current image at x_{t-1}.
-        :param cons: the channels corresponding to the volume and physical fields.
-        :param loads: the channels corresponding to the loads.
-        :param BCs: the channels corresponding to the boundary conditions.
-        :param t: the value of t, starting at 0 for the first diffusion step.
-        :param clip_denoised: if True, clip the x_start prediction to [-1, 1].
-        :param denoised_fn: if not None, a function which applies to the
-            x_start prediction before it is used to sample.
-        :param cond_fn_1: gradient function for the compliance regressor.
-        :param cond_fn_2: gradient function for the floating material classifier.
-        :param model_kwargs: if not None, a dict of extra keyword arguments to
-            pass to the model.
-        :return: a dict containing the following keys:
-                 - 'sample': a random sample from the model.
-                 - 'pred_xstart': a prediction of x_0.
-        """
-        out = self.p_mean_variance(
-            model,
-            x,
-            th.cat([cons], dim=1),  # 仅有一组约束，不再cat
-            t,
-            clip_denoised=clip_denoised,
-            denoised_fn=denoised_fn,
-            model_kwargs=model_kwargs,
-        )
-        noise = th.randn_like(x)
-        nonzero_mask = (
-            (t != 0).float().view(-1, *([1] * (len(x.shape) - 1)))
-        )  # no noise when t == 0
-        if cond_fn_1 is not None and cond_fn_2:
-            out["mean"] = self.condition_mean(
-                cond_fn_1, cond_fn_2, out, x, cons, loads, BCs, t, model_kwargs=model_kwargs
-            )
-            temp = out["mean"]
-        sample = out["mean"] + nonzero_mask * th.exp(0.5 * out["log_variance"]) * noise
-        return {"sample": sample, "pred_xstart": out["pred_xstart"]}
-
-
     def p_sample_loop(
             self,
             model,
@@ -557,59 +496,6 @@ class GaussianDiffusion:
                 cons,
                 loads,
                 BCs,
-                noise=noise,
-                clip_denoised=clip_denoised,
-                denoised_fn=denoised_fn,
-                cond_fn_1=cond_fn_1,
-                cond_fn_2=cond_fn_2,
-                model_kwargs=model_kwargs,
-                device=device,
-                progress=progress,
-        ):
-            final = sample
-        return final["sample"]
-
-    def p_sample_loop_IH(
-            self,
-            model,
-            shape,
-            cons,
-            noise=None,
-            clip_denoised=True,
-            denoised_fn=None,
-            cond_fn_1=None,
-            cond_fn_2=None,
-            model_kwargs=None,
-            device=None,
-            progress=False,
-    ):
-        """
-        Generate samples from the model.
-
-        :param model: the model module.
-        :param shape: the shape of the samples, (N, C, H, W).
-        :param cons: the channels corresponding to the volume and physical fields.
-        :param loads: the channels corresponding to the loads.
-        :param BCs: the channels corresponding to the boundary conditions.
-        :param noise: if specified, the noise from the encoder to sample.
-                      Should be of the same shape as `shape`.
-        :param clip_denoised: if True, clip x_start predictions to [-1, 1].
-        :param denoised_fn: if not None, a function which applies to the
-            x_start prediction before it is used to sample.
-        :param cond_fn_1: gradient function for the compliance regressor.
-        :param cond_fn_2: gradient function for the floating material classifier.
-        :param model_kwargs: if not None, a dict of extra keyword arguments to
-            pass to the model.
-        :param device: if specified, the device to create the samples on.
-                       If not specified, use a model parameter's device.
-        :param progress: if True, show a tqdm progress bar.
-        :return: a non-differentiable batch of samples.
-        """
-        final = None
-        for sample in self.p_sample_loop_progressive_IH(
-                model,
-                shape,
-                cons,
                 noise=noise,
                 clip_denoised=clip_denoised,
                 denoised_fn=denoised_fn,
@@ -670,60 +556,6 @@ class GaussianDiffusion:
                     cons,
                     loads,
                     BCs,
-                    t,
-                    clip_denoised=clip_denoised,
-                    denoised_fn=denoised_fn,
-                    cond_fn_1=cond_fn_1,
-                    cond_fn_2=cond_fn_2,
-                    model_kwargs=model_kwargs,
-                )
-                yield out
-                img = out["sample"]
-
-    def p_sample_loop_progressive_IH(
-            self,
-            model,
-            shape,
-            cons,
-            noise=None,
-            clip_denoised=True,
-            denoised_fn=None,
-            cond_fn_1=None,
-            cond_fn_2=None,
-            model_kwargs=None,
-            device=None,
-            progress=False,
-    ):
-        """
-        Generate samples from the model and yield intermediate samples from
-        each timestep of diffusion.
-
-        Arguments are the same as p_sample_loop().
-        Returns a generator over dicts, where each dict is the return value of
-        p_sample().
-        """
-        if device is None:
-            device = next(model.parameters()).device
-        assert isinstance(shape, (tuple, list))
-        if noise is not None:
-            img = noise
-        else:
-            img = th.randn(*shape, device=device)
-        indices = list(range(self.num_timesteps))[::-1]
-
-        if progress:
-            # Lazy import so that we don't depend on tqdm.
-            from tqdm.auto import tqdm
-
-            indices = tqdm(indices)
-
-        for i in indices:
-            t = th.tensor([i] * shape[0], device=device)
-            with th.no_grad():
-                out = self.p_sample_IH(
-                    model,
-                    img,
-                    cons,
                     t,
                     clip_denoised=clip_denoised,
                     denoised_fn=denoised_fn,

@@ -3,7 +3,7 @@ import inspect
 
 from . import gaussian_diffusion as gd
 from .respace import SpacedDiffusion, space_timesteps
-from .unet import SuperResModel, UNetModel, EncoderUNetModel
+from .unet_IH import SuperResModel, UNetModel, EncoderUNetModel
 
 def diffusion_defaults():
     """
@@ -179,7 +179,7 @@ def create_model(
 
     return UNetModel(
         image_size=image_size,
-        in_channels=1+5,
+        in_channels=1+3,
         model_channels=num_channels,
         out_channels=(1 if not learn_sigma else 2),
         num_res_blocks=num_res_blocks,

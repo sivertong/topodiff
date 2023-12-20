@@ -31,7 +31,7 @@ def load_data(
     if not data_dir:
         raise ValueError("unspecified data directory")
     all_images, all_constraints_pf, all_loads = _list_image_files_recursively(data_dir)
-    
+
     dataset = ImageDataset(
         image_size,
         all_images,

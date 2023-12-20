@@ -36,7 +36,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CodeSave/GitCode/topodiff&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CodeSave/GitCode/topodiff/topodiff&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -45,7 +45,16 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.image_train">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CodeSave\GitCode\topodiff\topodiff" />
+      <recent name="D:\CodeSave\GitCode\topodiff\scripts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CodeSave\GitCode\topodiff\scripts" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.topodiff_sample_IH">
     <configuration name="DatasetReader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="topodiff" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -68,6 +77,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="topodiff" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\long\.conda\envs\topodiff\python.exe" />
+      <option name="SDK_NAME" value="topodiff" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/topodiff_sample_IH.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="image_train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="topodiff" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -76,14 +108,63 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="TOPODIFF_LOGDIR" value="../checkpoints/diff_logdir" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\long\.conda\envs\topodiff\python.exe" />
+      <option name="SDK_NAME" value="topodiff" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/image_train.py" />
-      <option name="PARAMETERS" value="--image_size 64 --num_channels 128 --num_res_blocks 3 --learn_sigma True --dropout 0.3 --diffusion_steps 900 --noise_schedule cosine --batch_size 32 --save_interval 20000 --use_fp16 True --data_dir ../data/dataset_1_diff/training_data" />
+      <option name="PARAMETERS" value="--image_size 64 --num_channels 128 --num_res_blocks 3 --learn_sigma True --dropout 0.3 --diffusion_steps 900 --noise_schedule cosine --batch_size 32 --save_interval 20000 --use_fp16 True --data_dir ../data/dataset_1_diff/training_data --class_cond True" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="image_train_IH" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="topodiff" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="TOPODIFF_LOGDIR" value="../checkpoints/diff_logdir" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\long\.conda\envs\topodiff\python.exe" />
+      <option name="SDK_NAME" value="topodiff" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/image_train_IH.py" />
+      <option name="PARAMETERS" value="--image_size 64 --num_channels 128 --num_res_blocks 3 --learn_sigma True --dropout 0.3 --diffusion_steps 900 --noise_schedule cosine --batch_size 32 --save_interval 20000 --use_fp16 True --data_dir ../data/dataset_1_diff/training_data --class_cond True" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="topodiff_sample_IH" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="topodiff" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="TOPODIFF_LOGDIR" value="./generated" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\long\.conda\envs\topodiff\python.exe" />
+      <option name="SDK_NAME" value="topodiff" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/scripts" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/topodiff_sample_IH.py" />
+      <option name="PARAMETERS" value="--image_size 64 --num_channels 128 --num_res_blocks 3 --learn_sigma True --dropout 0.3 --use_fp16 True --diffusion_steps 1000 --timestep_respacing 100 --noise_schedule cosine --constraints_path ./data/dataset_1_diff/test_data_level_1 --num_samples 200 --model_path ../checkpoints/diff_logdir/model003000.pt --regressor_path ./checkpoints/TO_INDICATE --fm_classifier_path ./checkpoints/TO_INDICATE --regressor_scale 4.0 --classifier_fm_scale 3.0 --batch_size 32" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -92,6 +173,8 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.image_train_IH" />
+      <item itemvalue="Python.topodiff_sample_IH" />
       <item itemvalue="Python.DatasetReader" />
       <item itemvalue="Python.image_train" />
     </list>
@@ -120,7 +203,17 @@
       <workItem from="1701877330880" duration="4904000" />
       <workItem from="1701916700218" duration="1715000" />
       <workItem from="1701966809580" duration="608000" />
-      <workItem from="1702024401380" duration="4456000" />
+      <workItem from="1702024401380" duration="31694000" />
+      <workItem from="1702197476653" duration="2280000" />
+      <workItem from="1702211995877" duration="12320000" />
+      <workItem from="1702259080050" duration="1194000" />
+      <workItem from="1702305549130" duration="6182000" />
+      <workItem from="1702381587629" duration="4683000" />
+      <workItem from="1702489276752" duration="4918000" />
+      <workItem from="1702521102188" duration="7727000" />
+      <workItem from="1702542443730" duration="4973000" />
+      <workItem from="1702607692919" duration="39722000" />
+      <workItem from="1702866830276" duration="9307000" />
     </task>
     <servers />
   </component>
@@ -156,40 +249,56 @@
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/topodiff/train_util.py</url>
-          <line>154</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scripts/image_train.py</url>
-          <line>32</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/topodiff/train_util.py</url>
-          <line>155</line>
-          <option name="timeStamp" value="27" />
+          <url>file://$PROJECT_DIR$/topodiff/unet.py</url>
+          <line>691</line>
+          <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/topodiff/unet.py</url>
-          <line>661</line>
-          <option name="timeStamp" value="32" />
+          <line>879</line>
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/topodiff/unet.py</url>
-          <line>72</line>
-          <option name="timeStamp" value="34" />
+          <url>file://$PROJECT_DIR$/scripts/MatData_preprosess.py</url>
+          <line>10</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/topodiff/unet.py</url>
-          <line>486</line>
-          <option name="timeStamp" value="36" />
+          <url>file://$PROJECT_DIR$/topodiff/train_util_IH.py</url>
+          <line>201</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/topodiff/gaussian_diffusion.py</url>
+          <line>439</line>
+          <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/topodiff/train_util_IH.py</url>
+          <line>178</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scripts/topodiff_sample_IH.py</url>
+          <line>137</line>
+          <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/topodiff$image_train.coverage" NAME="image_train Coverage Results" MODIFIED="1702025067498" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/topodiff$image_train.coverage" NAME="image_train Coverage Results" MODIFIED="1702542273182" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
     <SUITE FILE_PATH="coverage/topodiff$DatasetReader.coverage" NAME="DatasetReader Coverage Results" MODIFIED="1701360415922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/topodiff$ConvertNpz2MAT.coverage" NAME="ConvertNpz2MAT Coverage Results" MODIFIED="1702832478958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/topodiff$image_train_IH.coverage" NAME="image_train_IH Coverage Results" MODIFIED="1702830670045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/topodiff$MatData_preprosess.coverage" NAME="MatData_preprosess Coverage Results" MODIFIED="1702635761262" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
+    <SUITE FILE_PATH="coverage/topodiff$topodiff_sample_IH.coverage" NAME="topodiff_sample_IH Coverage Results" MODIFIED="1702903407134" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scripts" />
   </component>
 </project>
